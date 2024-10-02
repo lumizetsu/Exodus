@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.30)
 
 project(moonveil)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
@@ -18,8 +18,12 @@ if(NOT CONFIGURED_ONCE)
         CACHE STRING "Flags used by the compiler during all build types." FORCE)
 endif()
 
+find_package(Vulkan REQUIRED)
+
 include_directories(
-    
+    ${CMAKE_SOURCE_DIR}/vendor/GLFW/include    
+    ${CMAKE_SOURCE_DIR}/vendor/glm
+    ${CMAKE_SOURCE_DIR}/vendor/assimp/include
 )
 
 file(GLOB_RECURSE SRC_FILES "src/*.cpp" "src/*.h" "src/*.hpp")
@@ -28,7 +32,7 @@ add_executable(moonveil ${SRC_FILES})
 
 target_link_libraries(
     moonveil
-    d3d12.lib
-    dxgi.lib
-    d3dcompiler.lib
+    Vulkan::Vulkan
+    ${CMAKE_SOURCE_DIR}/vendor/GLFW/lib/glfw3.lib
+    ${CMAKE_SOURCE_DIR}/vendor/assimp/lib/assimp-vc143-mt.lib
 )
