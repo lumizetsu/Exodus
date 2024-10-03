@@ -1,4 +1,3 @@
 .cache
-build
-build.bat
+build*
 
