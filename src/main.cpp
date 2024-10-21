@@ -117,6 +117,7 @@ class moonveil
         createLogicalDevice();
         createSwapChain();
         createImageViews();
+        createGraphicsPipeline();
     }
 
     void mainLoop()
@@ -595,6 +596,11 @@ class moonveil
                 throw std::runtime_error("failed to create image views!");
             }
         }
+    }
+
+    void createGraphicsPipeline()
+    {
+        
     }
 };
 
