@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.20)
 
-project(moonveil)
+project(Exodus)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -15,10 +15,10 @@ include_directories(
 
 file(GLOB_RECURSE SRC_FILES "src/*.cpp")
 
-add_executable(moonveil ${SRC_FILES})
+add_executable(Exodus ${SRC_FILES})
 
 target_link_libraries(
-    moonveil
+    Exodus
     Vulkan::Vulkan
     ${CMAKE_SOURCE_DIR}/vendor/GLFW/lib/glfw3.lib
     ${CMAKE_SOURCE_DIR}/vendor/assimp/lib/assimp-vc143-mt.lib
@@ -26,7 +26,7 @@ target_link_libraries(
 
 find_program(GLSL_VALIDATOR glslangValidator HINTS Vulkan::glslangValidator /usr/bin /usr/local/bin ${VULKAN_SDK}/Bin/ ${VULKAN_SDK}/Bin32/)
 if(NOT GLSL_VALIDATOR)
-    message(FATAL_ERROR "glslangValidator not found! Please ensure Vulkan SDK is installed and the path is set.")
+    message(FATAL_ERROR "glslangValidator not found! Please ensure Vulkan SDK is installed")
 endif()
 
 file(GLOB_RECURSE GLSL_SOURCE_FILES
@@ -43,7 +43,7 @@ foreach(GLSL ${GLSL_SOURCE_FILES})
         OUTPUT ${SPIRV}
         COMMAND ${GLSL_VALIDATOR} -V ${GLSL} -o ${SPIRV}
         DEPENDS ${GLSL}
-        COMMENT "Compiling shader ${FILE_NAME} to SPIR-V"
+        COMMENT "Compiling shader ${FILE_NAME} -> SPIR-V"
     )
     
     list(APPEND SPIRV_BINARY_FILES ${SPIRV})
@@ -54,4 +54,4 @@ add_custom_target(
     DEPENDS ${SPIRV_BINARY_FILES}
 )
 
-add_dependencies(moonveil Shaders)
+add_dependencies(Exodus Shaders)

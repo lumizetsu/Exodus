@@ -1,5 +1,3 @@
-#include <fstream>
-#include <ios>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <algorithm>
@@ -12,6 +10,8 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <ios>
 #include <vulkan/vulkan_core.h>
 
 const uint32_t WIDTH = 800;
@@ -70,7 +70,7 @@ struct SwapChainSupportDetails
     std::vector<VkPresentModeKHR> presentModes;
 };
 
-class moonveil
+class Exodus
 {
   public:
     void run()
@@ -107,7 +107,7 @@ class moonveil
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-        window = glfwCreateWindow(WIDTH, HEIGHT, "moonveil", nullptr, nullptr);
+        window = glfwCreateWindow(WIDTH, HEIGHT, "Exodus", nullptr, nullptr);
     }
 
     void initVulkan()
@@ -161,7 +161,7 @@ class moonveil
 
         VkApplicationInfo appInfo{};
         appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-        appInfo.pApplicationName = "moonveil";
+        appInfo.pApplicationName = "Exodus";
         appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
         appInfo.pEngineName = "No Engine";
         appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
@@ -621,9 +621,9 @@ class moonveil
         fragShaderStageInfo.pName = "main";
 
         VkPipelineShaderStageCreateInfo shaderStages[] = {vertShaderStageInfo, fragShaderStageInfo};
-
-
-
+        
+        
+        
 
         vkDestroyShaderModule(device, fragShaderModule, nullptr);
         vkDestroyShaderModule(device, vertShaderModule, nullptr);
@@ -667,7 +667,7 @@ class moonveil
 
 int main()
 {
-    moonveil app;
+    Exodus app;
 
     try
     {
