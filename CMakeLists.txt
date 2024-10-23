@@ -38,12 +38,13 @@ file(GLOB_RECURSE GLSL_SOURCE_FILES
 foreach(GLSL ${GLSL_SOURCE_FILES})
     get_filename_component(FILE_NAME ${GLSL} NAME)
     set(SPIRV "${CMAKE_SOURCE_DIR}/shaders/${FILE_NAME}.spv")
+    get_filename_component(SPIRV_NAME ${SPIRV} NAME)
     
     add_custom_command(
         OUTPUT ${SPIRV}
         COMMAND ${GLSL_VALIDATOR} -V ${GLSL} -o ${SPIRV}
         DEPENDS ${GLSL}
-        COMMENT "Compiling shader ${FILE_NAME} -> SPIR-V"
+        COMMENT "Compiling shader ${FILE_NAME} -> ${SPIRV_NAME}"
     )
     
     list(APPEND SPIRV_BINARY_FILES ${SPIRV})
