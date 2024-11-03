@@ -8,9 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(Vulkan REQUIRED)
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/vendor/GLFW/include    
+    ${CMAKE_SOURCE_DIR}/vendor/GLFW/include
     ${CMAKE_SOURCE_DIR}/vendor/glm
     ${CMAKE_SOURCE_DIR}/vendor/assimp/include
+    ${Vulkan_INCLUDE_DIR}
 )
 
 file(GLOB_RECURSE SRC_FILES "src/*.cpp")
