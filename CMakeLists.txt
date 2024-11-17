@@ -11,6 +11,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/vendor/GLFW/include
     ${CMAKE_SOURCE_DIR}/vendor/glm
     ${CMAKE_SOURCE_DIR}/vendor/stb_image
+    ${CMAKE_SOURCE_DIR}/vendor/OpenAL/include
     ${Vulkan_INCLUDE_DIR}
 )
 
@@ -22,6 +23,7 @@ target_link_libraries(
     Exodus
     Vulkan::Vulkan
     ${CMAKE_SOURCE_DIR}/vendor/GLFW/lib/glfw3.lib
+    ${CMAKE_SOURCE_DIR}/vendor/OpenAL/lib/OpenAL32.lib
 )
 
 find_program(GLSL_VALIDATOR glslangValidator HINTS Vulkan::glslangValidator /usr/bin /usr/local/bin ${VULKAN_SDK}/Bin/ ${VULKAN_SDK}/Bin32/)
