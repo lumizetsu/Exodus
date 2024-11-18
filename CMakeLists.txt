@@ -12,6 +12,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/vendor/glm
     ${CMAKE_SOURCE_DIR}/vendor/stb_image
     ${CMAKE_SOURCE_DIR}/vendor/OpenAL/include
+    ${CMAKE_SOURCE_DIR}/vendor/tiny_obj_loader
     ${Vulkan_INCLUDE_DIR}
 )
 
