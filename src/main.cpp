@@ -1,4 +1,3 @@
-#include <unordered_map>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
@@ -8,7 +7,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/hash.hpp>
-
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -32,12 +30,13 @@
 #include <string>
 #include <vector>
 #include <chrono>
+#include <unordered_map>
 
 const uint32_t WIDTH = 1920;
 const uint32_t HEIGHT = 1080;
 
-const std::string MODEL_PATH = "assets/models/viking_room.obj";
-const std::string TEXTURE_PATH = "assets/textures/viking_room.png";
+const std::string MODEL_PATH = "assets/models/knight.obj";
+const std::string TEXTURE_PATH = "assets/textures/armor.jpg";
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -230,6 +229,8 @@ class Exodus
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
         window = glfwCreateWindow(WIDTH, HEIGHT, "Exodus", nullptr, nullptr);
+
+        glfwSetWindowPos(window, 3440 / 2 - WIDTH / 2, 1440 / 2 - HEIGHT / 2);
         glfwSetWindowUserPointer(window, this);
         glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
     }
@@ -454,7 +455,7 @@ class Exodus
                                                         const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
                                                         void *pUserData)
     {
-        std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+        // std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
 
         return VK_FALSE;
     }
@@ -1392,11 +1393,12 @@ class Exodus
         float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
 
         UniformBufferObject ubo{};
-        ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        ubo.model = glm::rotate(ubo.model, time * glm::radians(60.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-        ubo.model = glm::rotate(ubo.model, time * glm::radians(30.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        // ubo.model = glm::rotate(ubo.model, time * glm::radians(60.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+        // ubo.model = glm::rotate(ubo.model, time * glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-        ubo.proj = glm::perspective(glm::radians(30.0f + (90.0f - 30.0f) * 0.5f * (1.0f + std::sin(1.0f * time * glm::two_pi<float>()))), swapChainExtent.width / (float) swapChainExtent.height, 0.1f, 10.0f);
+        // ubo.proj = glm::perspective(glm::radians(30.0f + (90.0f - 30.0f) * 0.5f * (1.0f + std::sin(1.0f * time * glm::two_pi<float>()))), swapChainExtent.width / (float) swapChainExtent.height, 0.1f, 10.0f);
+        ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float) swapChainExtent.height, 0.1f, 10.0f);
 
         ubo.proj[1][1] *= -1;
     
